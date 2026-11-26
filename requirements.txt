@@ -1,0 +1,10 @@
+pandas
+numpy
+scikit-learn
+shap
+joblib
+matplotlib
+requests
+scipy
+tabulate
+nba_api

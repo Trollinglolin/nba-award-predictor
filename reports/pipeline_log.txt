@@ -1,0 +1,152 @@
+[ingest] data/raw/kaggle_bref exists; skipping download (use --force to refresh)
+[ingest] Advanced.csv                         rows= 33780 seasons 1947-2027
+[ingest] Player Per Game.csv                  rows= 33780 seasons 1947-2027
+[ingest] Team Summaries.csv                   rows=  1938 seasons 1947-2027
+[ingest] End of Season Teams.csv              rows=  2222 seasons 1947-2025
+[ingest] End of Season Teams (Voting).csv     rows=  4484 seasons 1963-2025
+[ingest] Player Award Shares.csv              rows=  3465 seasons 1948-2025
+[ingest] All-Star Selections.csv              rows=  2058 seasons 1951-2026
+[ingest] Player Play By Play.csv              rows= 18695 seasons 1997-2027
+[ingest] label freshness: {'End of Season Teams.csv': 2025, 'End of Season Teams (Voting).csv': 2025, 'Player Award Shares.csv': 2025, 'All-Star Selections.csv': 2026}
+[features] Advanced NBA rows 26134 -> season rows 21271 (traded combined rows 2349, per-team stint rows 23785)
+[features] per-game join: 21271 rows, 0 without per-game stats
+[features] team join: 23785 stint rows, 0 without a team match
+[features] on/off join: 15004 of 15010 1997+ rows have on/off
+[features] filter g>=40*scale & mp>=1000*scale keeps 11801 of 21271 rows; All-NBA selections dropped: 0; All-Star selections dropped: 18
+[nba_features] crosswalk: {'bref_rows': 15010, 'matched': 15010, 'unmatched': 0, 'match_rate': 1.0, 'methods': {'exact': 14942, 'fuzzy': 60, 'exact_tiebreak': 8}, 'games_mismatch_gt2': 337}
+[features] qualified table (11604, 132); feature NaNs: {'prev_all_nba': 264}
+[train] All-NBA: train 1980-2019 (9466 rows, 555 positives); test 2020-2025 (1604 rows, 90 positives); features 34
+[train] cv logreg         {"C": 0.01}                                                                                                    PR-AUC 0.895  P@k 0.793
+[train] cv logreg         {"C": 0.1}                                                                                                     PR-AUC 0.899  P@k 0.797
+[train] cv logreg         {"C": 1.0}                                                                                                     PR-AUC 0.899  P@k 0.810
+[train] cv logreg         {"C": 10.0}                                                                                                    PR-AUC 0.894  P@k 0.807
+[train] cv random_forest  {"max_depth": null, "min_samples_leaf": 1}                                                                     PR-AUC 0.896  P@k 0.793
+[train] cv random_forest  {"max_depth": null, "min_samples_leaf": 5}                                                                     PR-AUC 0.895  P@k 0.790
+[train] cv random_forest  {"max_depth": null, "min_samples_leaf": 20}                                                                    PR-AUC 0.882  P@k 0.770
+[train] cv random_forest  {"max_depth": 8, "min_samples_leaf": 1}                                                                        PR-AUC 0.897  P@k 0.783
+[train] cv random_forest  {"max_depth": 8, "min_samples_leaf": 5}                                                                        PR-AUC 0.895  P@k 0.790
+[train] cv random_forest  {"max_depth": 8, "min_samples_leaf": 20}                                                                       PR-AUC 0.882  P@k 0.770
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 8, "min_samples_leaf": 20, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 8, "min_samples_leaf": 20, "l2_regularization": 1.0} PR-AUC 0.895  P@k 0.797
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 8, "min_samples_leaf": 80, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.810
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 8, "min_samples_leaf": 80, "l2_regularization": 1.0} PR-AUC 0.893  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 31, "min_samples_leaf": 20, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.793
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 31, "min_samples_leaf": 20, "l2_regularization": 1.0} PR-AUC 0.892  P@k 0.807
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 31, "min_samples_leaf": 80, "l2_regularization": 0.0} PR-AUC 0.888  P@k 0.793
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 31, "min_samples_leaf": 80, "l2_regularization": 1.0} PR-AUC 0.891  P@k 0.807
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 8, "min_samples_leaf": 20, "l2_regularization": 0.0} PR-AUC 0.890  P@k 0.813
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 8, "min_samples_leaf": 20, "l2_regularization": 1.0} PR-AUC 0.896  P@k 0.810
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 8, "min_samples_leaf": 80, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.810
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 8, "min_samples_leaf": 80, "l2_regularization": 1.0} PR-AUC 0.889  P@k 0.800
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 31, "min_samples_leaf": 20, "l2_regularization": 0.0} PR-AUC 0.892  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 31, "min_samples_leaf": 20, "l2_regularization": 1.0} PR-AUC 0.891  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 31, "min_samples_leaf": 80, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 31, "min_samples_leaf": 80, "l2_regularization": 1.0} PR-AUC 0.895  P@k 0.797
+[train] cv rank_by_vorp   PR-AUC 0.765  P@k 0.693
+[train] cv rank_by_ws     PR-AUC 0.765  P@k 0.697
+[train] cv rank_by_pts    PR-AUC 0.667  P@k 0.633
+[train] chosen by CV PR-AUC: logreg {'C': 0.1}
+[train] holdout (All-NBA):
+                 scorer          variant  pr_auc  roc_auc  precision_at_k  hits  slots  brier  p@k_2020_2023  p@k_2024plus
+                 logreg              raw   0.899    0.994           0.789    71     90  0.015          0.800         0.767
+                 logreg eligibility_mask   0.915    0.995           0.822    74     90  0.014          0.800         0.867
+          random_forest              raw   0.907    0.993           0.811    73     90  0.015          0.817         0.800
+          random_forest eligibility_mask   0.921    0.994           0.844    76     90  0.014          0.817         0.900
+                hist_gb              raw   0.893    0.992           0.800    72     90  0.016          0.800         0.800
+                hist_gb eligibility_mask   0.905    0.993           0.833    75     90  0.015          0.800         0.900
+logreg_no_voter_history              raw   0.915    0.995           0.822    74     90  0.014          0.833         0.800
+logreg_no_voter_history eligibility_mask   0.927    0.996           0.844    76     90  0.013          0.833         0.867
+           rank_by_vorp              raw   0.874    0.988           0.778    70     90    NaN          0.783         0.767
+           rank_by_vorp eligibility_mask   0.883    0.989           0.789    71     90    NaN          0.783         0.800
+             rank_by_ws              raw   0.709    0.968           0.633    57     90    NaN          0.667         0.567
+             rank_by_ws eligibility_mask   0.716    0.970           0.644    58     90    NaN          0.667         0.600
+            rank_by_pts              raw   0.717    0.963           0.644    58     90    NaN          0.667         0.600
+            rank_by_pts eligibility_mask   0.748    0.970           0.700    63     90    NaN          0.667         0.767
+[train] vote-share regressor: {'mae_all_rows': 0.01675725464566441, 'mae_vote_getters': 0.12739855912700693, 'spearman_within_season_vote_getters': 0.812262028877819, 'selection_precision_at_k_masked': 0.8222222222222222, 'team_assignment_accuracy_masked': 0.6081081081081081}
+[train] All-Star (test 2020-2026, k = real selections incl. injury replacements):
+      scorer   pr_auc  roc_auc  precision_at_k  hits  slots    brier
+      logreg 0.876172 0.984608        0.795699   148    186 0.028506
+     hist_gb 0.880378 0.983588        0.779570   145    186 0.028682
+ rank_by_pts 0.785643 0.961301        0.709677   132    186      NaN
+rank_by_vorp 0.793882 0.969201        0.731183   136    186      NaN
+[train] MVP (test 2020-2025):
+              scorer  winner_hits  seasons  mean_top5_overlap
+hist_gb_reg (masked)            4        6           3.833333
+   hist_gb_reg (raw)            4        6           3.833333
+        rank_by_vorp            3        6           3.333333
+          rank_by_ws            4        6           2.833333
+         rank_by_per            4        6           3.333333
+         rank_by_bpm            4        6           3.666667
+[train] wrote models to models and metrics to reports/metrics.json
+Background dataset has 500 samples but max_samples=100. Subsampling to 100 samples for SHAP value computation. To use all samples, set max_samples=500 when initializing the masker.
+[explain] SHAP computed for logreg
+[explain] SHAP computed for random_forest
+[explain] wrote reports/explain.md and figures in reports/figures
+[report] wrote reports/report.md
+[v2] nba_api group with_without  coverage of 1997-2019 training rows: 100%
+[v2] nba_api group availability  coverage of 1997-2019 training rows: 100%
+[v2] nba_api group seed          coverage of 1997-2019 training rows: 100%
+[v2] nba_api group nba_adv       coverage of 1997-2019 training rows: 100%
+[v2] nba_api group clutch        coverage of 1997-2019 training rows: 100%
+[v2] nba_api group est           coverage of 1997-2019 training rows: 100%
+[v2] nba_api group highlights    coverage of 1997-2019 training rows: 100%
+[v2] A base (v1 features)                     logreg   CV PR-AUC 0.900 P@k 0.809 | holdout hits 73/90
+[v2] A +fatigue                               hist_gb  CV PR-AUC 0.898 P@k 0.818 | holdout hits 72/90
+[v2] A +jump                                  logreg   CV PR-AUC 0.898 P@k 0.800 | holdout hits 74/90
+[v2] A +teammates                             hist_gb  CV PR-AUC 0.900 P@k 0.809 | holdout hits 72/90
+[v2] A +narrative                             hist_gb  CV PR-AUC 0.905 P@k 0.822 | holdout hits 71/90
+[v2] A +all Kaggle groups                     hist_gb  CV PR-AUC 0.901 P@k 0.818 | holdout hits 73/90
+[v2] B base (v1 features)                     hist_gb  CV PR-AUC 0.895 P@k 0.804 | holdout hits 72/90
+[v2] B +all Kaggle groups                     logreg   CV PR-AUC 0.896 P@k 0.809 | holdout hits 76/90
+[v2] B +all Kaggle +onoff                     logreg   CV PR-AUC 0.897 P@k 0.809 | holdout hits 76/90
+[v2] B +all Kaggle +onoff +with_without       logreg   CV PR-AUC 0.900 P@k 0.818 | holdout hits 74/90
+[v2] B +all Kaggle +onoff +availability       hist_gb  CV PR-AUC 0.898 P@k 0.800 | holdout hits 75/90
+[v2] B +all Kaggle +onoff +seed               logreg   CV PR-AUC 0.896 P@k 0.809 | holdout hits 75/90
+[v2] B +all Kaggle +onoff +nba_adv            logreg   CV PR-AUC 0.897 P@k 0.809 | holdout hits 76/90
+[v2] B +all Kaggle +onoff +clutch             hist_gb  CV PR-AUC 0.901 P@k 0.800 | holdout hits 74/90
+[v2] B +all Kaggle +onoff +est                hist_gb  CV PR-AUC 0.898 P@k 0.804 | holdout hits 72/90
+[v2] B +all Kaggle +onoff +highlights         hist_gb  CV PR-AUC 0.900 P@k 0.813 | holdout hits 76/90
+[v2] B +everything                            hist_gb  CV PR-AUC 0.898 P@k 0.809 | holdout hits 77/90
+[v2] no feature group improved CV per-season AP with a Bonferroni-adjusted CI above 0; v2 keeps the v1 feature set
+[v2] MVP A base                       CV winners 8/15 (capped mean rank 3.13, worst 18) | holdout 4/6
+[v2] MVP A +fatigue                   CV winners 9/15 (capped mean rank 3.00, worst 20) | holdout 4/6
+[v2] MVP A +narrative                 CV winners 9/15 (capped mean rank 3.20, worst 27) | holdout 4/6
+[v2] MVP A +all Kaggle groups         CV winners 9/15 (capped mean rank 2.93, worst 18) | holdout 5/6
+[v2] MVP B base                       CV winners 7/15 (capped mean rank 2.80, worst 248) | holdout 4/6
+[v2] MVP B +all Kaggle +onoff         CV winners 8/15 (capped mean rank 2.73, worst 17) | holdout 5/6
+[v2] MVP B +everything                CV winners 9/15 (capped mean rank 2.60, worst 258) | holdout 4/6
+[v2] chosen MVP set: A base (no set beat the base with a CI above 0)
+Background dataset has 500 samples but max_samples=100. Subsampling to 100 samples for SHAP value computation. To use all samples, set max_samples=500 when initializing the masker.
+[v2] wrote reports/v2_report.md
+Season 2025-26 (season=2026); fraction of schedule played ~100%; real All-NBA labels in data: no
+All-NBA model: v1 model (no v2 group adopted) (logreg); MVP model: v1 model (no v2 group adopted)
+65-game rule applied (exact: nba_api games with 20+ min, plus up to two 15-20 min games)
+ rank                  player team pos  g  games_for_rule  vorp  bpm  pts_per_game  team_win_pct  eligible_65  p_all_nba  pred_team  pred_vote_share  pred_mvp_share  p_all_star
+    1            Nikola Jokić  DEN   C 65            65.0   9.2 14.2          27.7         0.659         True      0.999          1            1.000           0.573       1.000
+    2 Shai Gilgeous-Alexander  OKC  PG 68            68.0   7.8 11.7          31.1         0.780         True      0.998          1            1.000           0.869       0.995
+    3            Kevin Durant  HOU  SF 78            78.0   4.7  4.5          26.0         0.634         True      0.879          1            0.346           0.049       0.998
+    4        Donovan Mitchell  CLE  SG 70            70.0   4.2  5.1          27.9         0.634         True      0.809          1            0.529           0.019       0.980
+    5            Jaylen Brown  BOS  SF 71            71.0   3.3  3.3          28.7         0.683         True      0.786          1            0.382           0.071       0.981
+    6            James Harden  2TM  PG 70            70.0   3.6  3.9          23.6         0.556         True      0.727          2            0.183           0.016       0.984
+    7           Jalen Brunson  NYK  PG 74            73.0   3.3  3.1          26.0         0.646         True      0.722          2            0.326           0.020       0.917
+    8            Tyrese Maxey  PHI  PG 70            70.0   4.9  5.4          28.3         0.549         True      0.696          2            0.382           0.039       0.954
+    9      Karl-Anthony Towns  NYK   C 75            75.0   3.1  3.3          20.1         0.646         True      0.685          2            0.299           0.021       0.837
+   10            Jamal Murray  DEN  PG 75            74.0   4.1  4.1          25.4         0.659         True      0.668          2            0.271           0.027       0.881
+   11           Jalen Johnson  ATL  SF 72            71.0   4.0  4.2          22.5         0.561         True      0.524          3            0.119           0.002       0.805
+   12           Kawhi Leonard  LAC  SF 65            65.0   5.3  8.0          27.9         0.512         True      0.464          3            0.486           0.000       0.763
+   13             Jalen Duren  DET   C 70            67.0   3.5  5.0          19.5         0.732         True      0.421          3            0.235           0.136       0.330
+   14          Alperen Şengün  HOU   C 72            71.0   3.7  4.2          20.4         0.634         True      0.334          3            0.042           0.000       0.715
+   15           Amen Thompson  HOU  PG 79            79.0   3.4  2.6          18.3         0.634         True      0.262          3            0.057           0.020       0.496
+   16           Chet Holmgren  OKC  PF 69            69.0   3.1  4.2          17.1         0.780         True      0.236          0            0.088           0.001       0.368
+   17          Scottie Barnes  TOR  PF 80            80.0   4.2  4.2          18.1         0.561         True      0.162          0            0.134           0.022       0.595
+   18             Evan Mobley  CLE  PF 65            65.0   2.6  3.0          18.2         0.634         True      0.148          0            0.022           0.005       0.564
+   19             Deni Avdija  POR  SF 66            65.0   3.5  4.3          24.2         0.512         True      0.140          0            0.024           0.000       0.392
+   20           Julius Randle  MIN  PF 79            79.0   2.3  1.5          21.1         0.598         True      0.087          0            0.007           0.000       0.305
+Predicted All-NBA 1st team: Nikola Jokić, Shai Gilgeous-Alexander, Kevin Durant, Donovan Mitchell, Jaylen Brown
+Predicted All-NBA 2nd team: James Harden, Jalen Brunson, Tyrese Maxey, Karl-Anthony Towns, Jamal Murray
+Predicted All-NBA 3rd team: Jalen Johnson, Kawhi Leonard, Jalen Duren, Alperen Şengün, Amen Thompson
+Predicted MVP top 3: Shai Gilgeous-Alexander (0.87), Nikola Jokić (0.57), Jalen Duren (0.14)
+Excluded by the 65-game rule (counted games < 65): Luka Dončić (counted=64, p=0.99), Victor Wembanyama (counted=64, p=0.95), Cade Cunningham (counted=63, p=0.93), Anthony Edwards (counted=60, p=0.65), LeBron James (counted=60, p=0.48). Rerun with --no-eligibility to include them.
+  Possible 62-game season-ending-injury exception (62-64 counted games and missed his team's last 3+ games; the data cannot confirm an injury or the league's ruling): Luka Dončić (missed last 5)
+saved reports/predictions_2026.csv
+[pipeline] done in 155s

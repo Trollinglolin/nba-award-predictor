@@ -1,0 +1,948 @@
+{
+  "all_nba": {
+    "train": [
+      1980,
+      2019
+    ],
+    "test": [
+      2020,
+      2025
+    ],
+    "chosen_model": "logreg",
+    "best_by_model": {
+      "logreg": {
+        "params": {
+          "C": 0.1
+        },
+        "cv_pr_auc": 0.8991980015607377,
+        "cv_precision_at_k": 0.7966666666666666,
+        "cv_roc_auc": 0.9915310732072212,
+        "cv_folds": [
+          {
+            "block": "2000-2004",
+            "pr_auc": 0.9057629016643575,
+            "roc_auc": 0.9884875183553599,
+            "precision_at_k": 0.8,
+            "hits": 60,
+            "slots": 75,
+            "brier": 0.04474146583846648
+          },
+          {
+            "block": "2005-2009",
+            "pr_auc": 0.9071918353330076,
+            "roc_auc": 0.9927081604426002,
+            "precision_at_k": 0.7866666666666666,
+            "hits": 59,
+            "slots": 75,
+            "brier": 0.0440389029334685
+          },
+          {
+            "block": "2010-2014",
+            "pr_auc": 0.8893928886466922,
+            "roc_auc": 0.9910594744121716,
+            "precision_at_k": 0.7866666666666666,
+            "hits": 59,
+            "slots": 75,
+            "brier": 0.04121581058264234
+          },
+          {
+            "block": "2015-2019",
+            "pr_auc": 0.894444380598894,
+            "roc_auc": 0.9938691396187532,
+            "precision_at_k": 0.8133333333333334,
+            "hits": 61,
+            "slots": 75,
+            "brier": 0.043970288043323244
+          }
+        ]
+      },
+      "random_forest": {
+        "params": {
+          "max_depth": 8,
+          "min_samples_leaf": 1
+        },
+        "cv_pr_auc": 0.8972793246204062,
+        "cv_precision_at_k": 0.7833333333333332,
+        "cv_roc_auc": 0.9914909450878531,
+        "cv_folds": [
+          {
+            "block": "2000-2004",
+            "pr_auc": 0.8964314108229983,
+            "roc_auc": 0.9889221732745962,
+            "precision_at_k": 0.76,
+            "hits": 57,
+            "slots": 75,
+            "brier": 0.01759625476730911
+          },
+          {
+            "block": "2005-2009",
+            "pr_auc": 0.9016693171230078,
+            "roc_auc": 0.9929294605809129,
+            "precision_at_k": 0.7866666666666666,
+            "hits": 59,
+            "slots": 75,
+            "brier": 0.016263548516505633
+          },
+          {
+            "block": "2010-2014",
+            "pr_auc": 0.8847639124700932,
+            "roc_auc": 0.9899751037344398,
+            "precision_at_k": 0.7866666666666666,
+            "hits": 59,
+            "slots": 75,
+            "brier": 0.017751198612761834
+          },
+          {
+            "block": "2015-2019",
+            "pr_auc": 0.9062526580655254,
+            "roc_auc": 0.9941370427614631,
+            "precision_at_k": 0.8,
+            "hits": 60,
+            "slots": 75,
+            "brier": 0.014911045600065792
+          }
+        ]
+      },
+      "hist_gb": {
+        "params": {
+          "learning_rate": 0.1,
+          "max_iter": 150,
+          "max_leaf_nodes": 8,
+          "min_samples_leaf": 20,
+          "l2_regularization": 1.0
+        },
+        "cv_pr_auc": 0.8958825587744828,
+        "cv_precision_at_k": 0.8099999999999999,
+        "cv_roc_auc": 0.9913942319877895,
+        "cv_folds": [
+          {
+            "block": "2000-2004",
+            "pr_auc": 0.8957096480409499,
+            "roc_auc": 0.9890161527165933,
+            "precision_at_k": 0.8,
+            "hits": 60,
+            "slots": 75,
+            "brier": 0.01904819906730844
+          },
+          {
+            "block": "2005-2009",
+            "pr_auc": 0.8974655298528711,
+            "roc_auc": 0.9915573997233748,
+            "precision_at_k": 0.8133333333333334,
+            "hits": 61,
+            "slots": 75,
+            "brier": 0.014981818830935698
+          },
+          {
+            "block": "2010-2014",
+            "pr_auc": 0.8908778102049884,
+            "roc_auc": 0.9912475795297372,
+            "precision_at_k": 0.8,
+            "hits": 60,
+            "slots": 75,
+            "brier": 0.017750216808066988
+          },
+          {
+            "block": "2015-2019",
+            "pr_auc": 0.8994772469991215,
+            "roc_auc": 0.9937557959814529,
+            "precision_at_k": 0.8266666666666667,
+            "hits": 62,
+            "slots": 75,
+            "brier": 0.01551006935493207
+          }
+        ]
+      }
+    },
+    "baselines_cv": {
+      "rank_by_vorp": {
+        "cv_pr_auc": 0.765293666122742,
+        "cv_precision_at_k": 0.6933333333333334
+      },
+      "rank_by_ws": {
+        "cv_pr_auc": 0.7648593548321748,
+        "cv_precision_at_k": 0.6966666666666668
+      },
+      "rank_by_pts": {
+        "cv_pr_auc": 0.6673925645669201,
+        "cv_precision_at_k": 0.6333333333333333
+      }
+    },
+    "brier_uncalibrated_holdout": {
+      "logreg": 0.04149224084253653,
+      "random_forest": 0.015413139200773153,
+      "hist_gb": 0.015872547763240662
+    },
+    "calibration": {
+      "logreg": {
+        "a": 0.9567588194969788,
+        "b": -2.978405373914724
+      },
+      "random_forest": {
+        "a": 1.3455618472941056,
+        "b": 0.20348097879261834
+      },
+      "hist_gb": {
+        "a": 0.7913950390525161,
+        "b": -0.16048598059041339
+      }
+    },
+    "ablation_no_voter_history_cv": {
+      "cv_pr_auc": 0.8988809081216705,
+      "cv_precision_at_k": 0.8066666666666666,
+      "cv_roc_auc": 0.9909187445267769,
+      "cv_brier": 0.0463010378528681
+    },
+    "holdout": [
+      {
+        "scorer": "logreg",
+        "variant": "raw",
+        "pr_auc": 0.8987263436783219,
+        "roc_auc": 0.9936958755320712,
+        "precision_at_k": 0.7888888888888889,
+        "hits": 71,
+        "slots": 90,
+        "brier": 0.015300707698434515,
+        "p@k_2020_2023": 0.8,
+        "p@k_2024plus": 0.7666666666666667
+      },
+      {
+        "scorer": "logreg",
+        "variant": "eligibility_mask",
+        "pr_auc": 0.9152808387887975,
+        "roc_auc": 0.9948113899897255,
+        "precision_at_k": 0.8222222222222222,
+        "hits": 74,
+        "slots": 90,
+        "brier": 0.014167865783495385,
+        "p@k_2020_2023": 0.8,
+        "p@k_2024plus": 0.8666666666666667
+      },
+      {
+        "scorer": "logreg",
+        "variant": "mask+positional",
+        "pr_auc": 0.9152808387887975,
+        "roc_auc": 0.9948113899897255,
+        "precision_at_k": 0.8333333333333334,
+        "hits": 75,
+        "slots": 90,
+        "brier": 0.014167865783495385,
+        "p@k_2020_2023": 0.8166666666666667,
+        "p@k_2024plus": 0.8666666666666667
+      },
+      {
+        "scorer": "random_forest",
+        "variant": "raw",
+        "pr_auc": 0.9065262003909929,
+        "roc_auc": 0.9926023778071335,
+        "precision_at_k": 0.8111111111111111,
+        "hits": 73,
+        "slots": 90,
+        "brier": 0.014870971128729071,
+        "p@k_2020_2023": 0.8166666666666667,
+        "p@k_2024plus": 0.8
+      },
+      {
+        "scorer": "random_forest",
+        "variant": "eligibility_mask",
+        "pr_auc": 0.9207297381134513,
+        "roc_auc": 0.9939087039483341,
+        "precision_at_k": 0.8444444444444444,
+        "hits": 76,
+        "slots": 90,
+        "brier": 0.013656478686824187,
+        "p@k_2020_2023": 0.8166666666666667,
+        "p@k_2024plus": 0.9
+      },
+      {
+        "scorer": "random_forest",
+        "variant": "mask+positional",
+        "pr_auc": 0.9207297381134513,
+        "roc_auc": 0.9939087039483341,
+        "precision_at_k": 0.8222222222222222,
+        "hits": 74,
+        "slots": 90,
+        "brier": 0.013656478686824187,
+        "p@k_2020_2023": 0.7833333333333333,
+        "p@k_2024plus": 0.9
+      },
+      {
+        "scorer": "hist_gb",
+        "variant": "raw",
+        "pr_auc": 0.8932488099129805,
+        "roc_auc": 0.9923308381036254,
+        "precision_at_k": 0.8,
+        "hits": 72,
+        "slots": 90,
+        "brier": 0.015842048199867988,
+        "p@k_2020_2023": 0.8,
+        "p@k_2024plus": 0.8
+      },
+      {
+        "scorer": "hist_gb",
+        "variant": "eligibility_mask",
+        "pr_auc": 0.9048252836125814,
+        "roc_auc": 0.9933582856304124,
+        "precision_at_k": 0.8333333333333334,
+        "hits": 75,
+        "slots": 90,
+        "brier": 0.014921756284353872,
+        "p@k_2020_2023": 0.8,
+        "p@k_2024plus": 0.9
+      },
+      {
+        "scorer": "hist_gb",
+        "variant": "mask+positional",
+        "pr_auc": 0.9048252836125814,
+        "roc_auc": 0.9933582856304124,
+        "precision_at_k": 0.8,
+        "hits": 72,
+        "slots": 90,
+        "brier": 0.014921756284353872,
+        "p@k_2020_2023": 0.75,
+        "p@k_2024plus": 0.9
+      },
+      {
+        "scorer": "logreg_no_voter_history",
+        "variant": "raw",
+        "pr_auc": 0.9153092120051295,
+        "roc_auc": 0.9948627623660649,
+        "precision_at_k": 0.8222222222222222,
+        "hits": 74,
+        "slots": 90,
+        "brier": 0.013792156642686817,
+        "p@k_2020_2023": 0.8333333333333334,
+        "p@k_2024plus": 0.8
+      },
+      {
+        "scorer": "logreg_no_voter_history",
+        "variant": "eligibility_mask",
+        "pr_auc": 0.9274732282902518,
+        "roc_auc": 0.9957214149420226,
+        "precision_at_k": 0.8444444444444444,
+        "hits": 76,
+        "slots": 90,
+        "brier": 0.0128211056909623,
+        "p@k_2020_2023": 0.8333333333333334,
+        "p@k_2024plus": 0.8666666666666667
+      },
+      {
+        "scorer": "logreg_no_voter_history",
+        "variant": "mask+positional",
+        "pr_auc": 0.9274732282902518,
+        "roc_auc": 0.9957214149420226,
+        "precision_at_k": 0.8444444444444444,
+        "hits": 76,
+        "slots": 90,
+        "brier": 0.0128211056909623,
+        "p@k_2020_2023": 0.8333333333333334,
+        "p@k_2024plus": 0.8666666666666667
+      },
+      {
+        "scorer": "rank_by_vorp",
+        "variant": "raw",
+        "pr_auc": 0.8744422419980301,
+        "roc_auc": 0.9876522824012915,
+        "precision_at_k": 0.7777777777777778,
+        "hits": 70,
+        "slots": 90,
+        "brier": NaN,
+        "p@k_2020_2023": 0.7833333333333333,
+        "p@k_2024plus": 0.7666666666666667
+      },
+      {
+        "scorer": "rank_by_vorp",
+        "variant": "eligibility_mask",
+        "pr_auc": 0.8834781605431052,
+        "roc_auc": 0.9891824453251138,
+        "precision_at_k": 0.7888888888888889,
+        "hits": 71,
+        "slots": 90,
+        "brier": NaN,
+        "p@k_2020_2023": 0.7833333333333333,
+        "p@k_2024plus": 0.8
+      },
+      {
+        "scorer": "rank_by_vorp",
+        "variant": "mask+positional",
+        "pr_auc": 0.8834781605431052,
+        "roc_auc": 0.9891824453251138,
+        "precision_at_k": 0.8,
+        "hits": 72,
+        "slots": 90,
+        "brier": NaN,
+        "p@k_2020_2023": 0.8,
+        "p@k_2024plus": 0.8
+      },
+      {
+        "scorer": "rank_by_ws",
+        "variant": "raw",
+        "pr_auc": 0.7087522279548862,
+        "roc_auc": 0.9679106120651695,
+        "precision_at_k": 0.6333333333333333,
+        "hits": 57,
+        "slots": 90,
+        "brier": NaN,
+        "p@k_2020_2023": 0.6666666666666666,
+        "p@k_2024plus": 0.5666666666666667
+      },
+      {
+        "scorer": "rank_by_ws",
+        "variant": "eligibility_mask",
+        "pr_auc": 0.7155096739230179,
+        "roc_auc": 0.9698444150888008,
+        "precision_at_k": 0.6444444444444445,
+        "hits": 58,
+        "slots": 90,
+        "brier": NaN,
+        "p@k_2020_2023": 0.6666666666666666,
+        "p@k_2024plus": 0.6
+      },
+      {
+        "scorer": "rank_by_ws",
+        "variant": "mask+positional",
+        "pr_auc": 0.7155096739230179,
+        "roc_auc": 0.9698444150888008,
+        "precision_at_k": 0.6777777777777778,
+        "hits": 61,
+        "slots": 90,
+        "brier": NaN,
+        "p@k_2020_2023": 0.7166666666666667,
+        "p@k_2024plus": 0.6
+      },
+      {
+        "scorer": "rank_by_pts",
+        "variant": "raw",
+        "pr_auc": 0.7171725386437269,
+        "roc_auc": 0.9626779685894613,
+        "precision_at_k": 0.6444444444444445,
+        "hits": 58,
+        "slots": 90,
+        "brier": NaN,
+        "p@k_2020_2023": 0.6666666666666666,
+        "p@k_2024plus": 0.6
+      },
+      {
+        "scorer": "rank_by_pts",
+        "variant": "eligibility_mask",
+        "pr_auc": 0.7480942577098263,
+        "roc_auc": 0.9696572728607075,
+        "precision_at_k": 0.7,
+        "hits": 63,
+        "slots": 90,
+        "brier": NaN,
+        "p@k_2020_2023": 0.6666666666666666,
+        "p@k_2024plus": 0.7666666666666667
+      },
+      {
+        "scorer": "rank_by_pts",
+        "variant": "mask+positional",
+        "pr_auc": 0.7480942577098263,
+        "roc_auc": 0.9696572728607075,
+        "precision_at_k": 0.7333333333333333,
+        "hits": 66,
+        "slots": 90,
+        "brier": NaN,
+        "p@k_2020_2023": 0.7166666666666667,
+        "p@k_2024plus": 0.7666666666666667
+      }
+    ],
+    "team_assignment_accuracy_best_masked": 0.6081081081081081,
+    "sum_of_probabilities_per_test_season": {
+      "2020": 13.52,
+      "2021": 16.39,
+      "2022": 14.89,
+      "2023": 14.47,
+      "2024": 14.19,
+      "2025": 14.87
+    }
+  },
+  "all_nba_vote_share": {
+    "mae_all_rows": 0.01675725464566441,
+    "mae_vote_getters": 0.12739855912700693,
+    "spearman_within_season_vote_getters": 0.812262028877819,
+    "selection_precision_at_k_masked": 0.8222222222222222,
+    "team_assignment_accuracy_masked": 0.6081081081081081
+  },
+  "all_star": {
+    "chosen_model": "logreg",
+    "test_last": 2026,
+    "best_by_model": {
+      "logreg": {
+        "params": {
+          "C": 1.0
+        },
+        "cv_pr_auc": 0.8887421282992257,
+        "cv_precision_at_k": 0.7878920869701312,
+        "cv_roc_auc": 0.9845625071374879,
+        "cv_folds": [
+          {
+            "block": "2000-2004",
+            "pr_auc": 0.8819195665263314,
+            "roc_auc": 0.9790746543778802,
+            "precision_at_k": 0.7637795275590551,
+            "hits": 97,
+            "slots": 127,
+            "brier": 0.07311635944344286
+          },
+          {
+            "block": "2005-2009",
+            "pr_auc": 0.9118855848096992,
+            "roc_auc": 0.9876521739130435,
+            "precision_at_k": 0.8307692307692308,
+            "hits": 108,
+            "slots": 130,
+            "brier": 0.06230408445184776
+          },
+          {
+            "block": "2010-2014",
+            "pr_auc": 0.8653996056833178,
+            "roc_auc": 0.9837663243665589,
+            "precision_at_k": 0.7734375,
+            "hits": 99,
+            "slots": 128,
+            "brier": 0.05865102955354604
+          },
+          {
+            "block": "2015-2019",
+            "pr_auc": 0.8957637561775543,
+            "roc_auc": 0.9877568758924691,
+            "precision_at_k": 0.7835820895522388,
+            "hits": 105,
+            "slots": 134,
+            "brier": 0.05267329429847392
+          }
+        ]
+      },
+      "hist_gb": {
+        "params": {
+          "learning_rate": 0.03,
+          "max_iter": 400,
+          "max_leaf_nodes": 8,
+          "min_samples_leaf": 80,
+          "l2_regularization": 0.0
+        },
+        "cv_pr_auc": 0.87942182230037,
+        "cv_precision_at_k": 0.7762327233268848,
+        "cv_roc_auc": 0.9824126976081868,
+        "cv_folds": [
+          {
+            "block": "2000-2004",
+            "pr_auc": 0.8719430178277008,
+            "roc_auc": 0.9767225806451614,
+            "precision_at_k": 0.7480314960629921,
+            "hits": 95,
+            "slots": 127,
+            "brier": 0.03335854068196621
+          },
+          {
+            "block": "2005-2009",
+            "pr_auc": 0.8993601458004887,
+            "roc_auc": 0.9850635451505017,
+            "precision_at_k": 0.8076923076923077,
+            "hits": 105,
+            "slots": 130,
+            "brier": 0.028878275454478085
+          },
+          {
+            "block": "2010-2014",
+            "pr_auc": 0.8664166735171055,
+            "roc_auc": 0.98262222346244,
+            "precision_at_k": 0.765625,
+            "hits": 98,
+            "slots": 128,
+            "brier": 0.032104707480266864
+          },
+          {
+            "block": "2015-2019",
+            "pr_auc": 0.8799674520561853,
+            "roc_auc": 0.9852424411746445,
+            "precision_at_k": 0.7835820895522388,
+            "hits": 105,
+            "slots": 134,
+            "brier": 0.02710191649287542
+          }
+        ]
+      }
+    },
+    "holdout": [
+      {
+        "scorer": "logreg",
+        "pr_auc": 0.8761719426602265,
+        "roc_auc": 0.9846075909905697,
+        "precision_at_k": 0.7956989247311828,
+        "hits": 148,
+        "slots": 186,
+        "brier": 0.02850622749582532
+      },
+      {
+        "scorer": "hist_gb",
+        "pr_auc": 0.8803779672057354,
+        "roc_auc": 0.9835879250772868,
+        "precision_at_k": 0.7795698924731183,
+        "hits": 145,
+        "slots": 186,
+        "brier": 0.028682318733119057
+      },
+      {
+        "scorer": "rank_by_pts",
+        "pr_auc": 0.7856426557546607,
+        "roc_auc": 0.9613014054503417,
+        "precision_at_k": 0.7096774193548387,
+        "hits": 132,
+        "slots": 186,
+        "brier": NaN
+      },
+      {
+        "scorer": "rank_by_vorp",
+        "pr_auc": 0.7938821729265152,
+        "roc_auc": 0.9692005689346115,
+        "precision_at_k": 0.7311827956989247,
+        "hits": 136,
+        "slots": 186,
+        "brier": NaN
+      }
+    ]
+  },
+  "mvp": {
+    "test_last": 2025,
+    "holdout": [
+      {
+        "scorer": "hist_gb_reg (masked)",
+        "winner_hits": 4,
+        "seasons": 6,
+        "mean_top5_overlap": 3.8333333333333335,
+        "per_season": [
+          {
+            "season": 2020,
+            "pred_winner": "Giannis Antetokounmpo",
+            "real_winner": "Giannis Antetokounmpo",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2021,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2022,
+            "pred_winner": "Joel Embiid",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2023,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Joel Embiid",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2024,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2025,
+            "pred_winner": "Shai Gilgeous-Alexander",
+            "real_winner": "Shai Gilgeous-Alexander",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          }
+        ]
+      },
+      {
+        "scorer": "hist_gb_reg (raw)",
+        "winner_hits": 4,
+        "seasons": 6,
+        "mean_top5_overlap": 3.8333333333333335,
+        "per_season": [
+          {
+            "season": 2020,
+            "pred_winner": "Giannis Antetokounmpo",
+            "real_winner": "Giannis Antetokounmpo",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2021,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2022,
+            "pred_winner": "Joel Embiid",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2023,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Joel Embiid",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2024,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2025,
+            "pred_winner": "Shai Gilgeous-Alexander",
+            "real_winner": "Shai Gilgeous-Alexander",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          }
+        ]
+      },
+      {
+        "scorer": "rank_by_vorp",
+        "winner_hits": 3,
+        "seasons": 6,
+        "mean_top5_overlap": 3.3333333333333335,
+        "per_season": [
+          {
+            "season": 2020,
+            "pred_winner": "James Harden",
+            "real_winner": "Giannis Antetokounmpo",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2021,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2022,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2023,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Joel Embiid",
+            "hit": false,
+            "real_winner_pred_rank": 3,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2024,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2025,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Shai Gilgeous-Alexander",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 3
+          }
+        ]
+      },
+      {
+        "scorer": "rank_by_ws",
+        "winner_hits": 4,
+        "seasons": 6,
+        "mean_top5_overlap": 2.8333333333333335,
+        "per_season": [
+          {
+            "season": 2020,
+            "pred_winner": "James Harden",
+            "real_winner": "Giannis Antetokounmpo",
+            "hit": false,
+            "real_winner_pred_rank": 4,
+            "top5_overlap": 2
+          },
+          {
+            "season": 2021,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 2
+          },
+          {
+            "season": 2022,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2023,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Joel Embiid",
+            "hit": false,
+            "real_winner_pred_rank": 4,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2024,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2025,
+            "pred_winner": "Shai Gilgeous-Alexander",
+            "real_winner": "Shai Gilgeous-Alexander",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 3
+          }
+        ]
+      },
+      {
+        "scorer": "rank_by_per",
+        "winner_hits": 4,
+        "seasons": 6,
+        "mean_top5_overlap": 3.3333333333333335,
+        "per_season": [
+          {
+            "season": 2020,
+            "pred_winner": "Giannis Antetokounmpo",
+            "real_winner": "Giannis Antetokounmpo",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2021,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2022,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2023,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Joel Embiid",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2024,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2025,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Shai Gilgeous-Alexander",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 3
+          }
+        ]
+      },
+      {
+        "scorer": "rank_by_bpm",
+        "winner_hits": 4,
+        "seasons": 6,
+        "mean_top5_overlap": 3.6666666666666665,
+        "per_season": [
+          {
+            "season": 2020,
+            "pred_winner": "Giannis Antetokounmpo",
+            "real_winner": "Giannis Antetokounmpo",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 5
+          },
+          {
+            "season": 2021,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2022,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2023,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Joel Embiid",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 3
+          },
+          {
+            "season": 2024,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Nikola Joki\u0107",
+            "hit": true,
+            "real_winner_pred_rank": 1,
+            "top5_overlap": 4
+          },
+          {
+            "season": 2025,
+            "pred_winner": "Nikola Joki\u0107",
+            "real_winner": "Shai Gilgeous-Alexander",
+            "hit": false,
+            "real_winner_pred_rank": 2,
+            "top5_overlap": 3
+          }
+        ]
+      }
+    ]
+  }
+}

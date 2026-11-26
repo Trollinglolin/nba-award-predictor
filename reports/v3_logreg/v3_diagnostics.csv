@@ -1,0 +1,11 @@
+set,rank_mitchell_2025,rank_jwilliams_2025,rank_morant_2022,pred_C_2024_25,actual_C_2024_25,holdout_misses
+A base (v1 features),16.0,17.0,17.0,8,5,17
+B base (v1 features),17.0,18.0,16.0,8,5,16
+H1a team block,17.0,15.0,16.0,8,5,16
+H1b pts curvature,15.0,16.0,14.0,8,5,16
+H1c wider regularisation,17.0,16.0,16.0,8,5,17
+H3 team role,18.0,15.0,17.0,8,5,17
+H4 seed,17.0,18.0,16.0,8,5,16
+H6a archetype,15.0,18.0,14.0,8,5,17
+H7 defense gate,15.0,18.0,17.0,8,5,17
+H8 improver,14.0,18.0,15.0,8,5,14

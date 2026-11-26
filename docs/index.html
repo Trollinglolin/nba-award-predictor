@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>All-NBA Predictor</title>
+<meta name="description" content="Predicting All-NBA teams from season-relative advanced stats, with a 2020-2025 holdout and 2025-26 picks.">
+<style>
+:root{--bg:#f6f5f1;--card:#fff;--ink:#16181b;--mute:#62666c;--line:#dddbd4;--accent:#a2341f;--hit:#2f7d4f;--miss:#b23a2a;--t1:#b8860b;--t2:#7d8792;--t3:#9a5b2e}
+@media (prefers-color-scheme:dark){:root{--bg:#121315;--card:#1b1c1f;--ink:#ebeae6;--mute:#999ca1;--line:#2d2f33;--accent:#e2765f;--hit:#5fb985;--miss:#e0705f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-variant-numeric:tabular-nums}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+header{padding:48px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13px;color:var(--mute);margin:0 0 6px}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.1;margin:0 0 12px;letter-spacing:-.01em}
+.lede{max-width:680px;color:var(--mute);margin:0}
+header a{color:var(--accent)}
+section{padding:36px 0;border-bottom:1px solid var(--line)}
+h2{font-size:20px;margin:0 0 6px}
+.sub{color:var(--mute);margin:0 0 20px;font-size:15px;max-width:700px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.tabs button{font:inherit;font-size:15px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:6px 13px;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.team{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.team h3{margin:0 0 8px;font-size:14px;color:var(--mute);font-weight:600}
+.pl{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line);font-size:15px}
+.pl:first-of-type{border-top:0}
+.pl small{color:var(--mute)}
+.bar{height:4px;background:var(--line);border-radius:2px;margin-top:4px;width:120px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:2px}
+.score{font-size:15px;margin:0 0 16px}
+.score b{font-size:22px}
+.badge{font-size:12px;padding:1px 7px;border-radius:10px;border:1px solid currentColor;white-space:nowrap}
+.hit{color:var(--hit)}.miss{color:var(--miss)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:13px;font-weight:600;color:var(--mute)}
+.num{text-align:right}
+.note{font-size:14px;color:var(--mute);margin-top:14px;max-width:720px}
+figure{margin:0}
+figure img{width:100%;height:auto;border:1px solid var(--line);border-radius:6px;background:#fff}
+figcaption{font-size:14px;color:var(--mute);margin-top:6px}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+footer{padding:28px 0 48px;color:var(--mute);font-size:14px}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="kicker">NBA analytics · calibrated logistic regression + SHAP</p>
+  <h1>All-NBA Predictor</h1>
+  <p class="lede">Who makes the 15 All-NBA spots? The model reads season-relative advanced stats (PER, WS, BPM, VORP), box-score production, availability and team success. It's trained on 1980-2019, then scored once on 2020-2025, a stretch it never saw. <a href="https://github.com/Trollinglolin/nba-award-predictor">Code on GitHub</a></p>
+</header>
+
+<section>
+  <h2>Pick a season</h2>
+  <p class="sub" id="sub"></p>
+  <div class="tabs" id="tabs"></div>
+  <div id="view"></div>
+</section>
+
+<section>
+  <h2>Holdout results, 2020-2025</h2>
+  <p class="sub">90 All-NBA slots over six seasons, with the 65-game rule applied from 2024. "Found" counts real selections that land in a model's top 15 each season.</p>
+  <div class="scroll"><table id="overall"></table></div>
+  <p class="note">Ranking by VORP alone is a strong baseline. The model's edge on the holdout is small and within noise. Across the 20 cross-validation seasons (2000-2019) the gap is clearer: 80% of selections found vs 69%.</p>
+</section>
+
+<section>
+  <h2>What drives a pick</h2>
+  <p class="sub">Impact metrics carry most of the weight, then scoring volume, then availability and team record.</p>
+  <div class="figs">
+    <figure><img src="img/shap_summary_logreg.png" alt="SHAP summary for the logistic model" loading="lazy"><figcaption>SHAP values for the chosen logistic model.</figcaption></figure>
+    <figure><img src="img/holdout_per_season.png" alt="Holdout hits per season" loading="lazy"><figcaption>Selections found per holdout season, model vs baselines.</figcaption></figure>
+  </div>
+</section>
+
+<footer>Data: Basketball-Reference via the Kaggle export <code>sumitrodatta/nba-aba-baa-stats</code>, plus nba_api game logs for the exact 65-game count. Method and limitations in the <a href="https://github.com/Trollinglolin/nba-award-predictor#readme">README</a>.</footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+const D = window.AWARDS, $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const label = y => `${y - 1}-${String(y).slice(2)}`;
+const seasons = [...Object.keys(D.history).map(Number), 2026].sort((a, b) => b - a);
+const ord = ['1st', '2nd', '3rd'];
+const pct = p => `${Math.round(p * 100)}%`;
+const bar = p => `<div class="bar"><i style="width:${Math.max(2, p * 100)}%"></i></div>`;
+
+function player(p, extra) {
+  return `<div class="pl"><div>${esc(p.player)} <small>${esc(p.team)} · ${esc(p.pos)}</small>${bar(p.p)}</div><div style="text-align:right">${extra || ''}<div><small>${pct(p.p)}</small></div></div></div>`;
+}
+
+function renderPast(y) {
+  const rows = D.history[y];
+  const picks = rows.filter(r => r.picked).sort((a, b) => a.rank - b.rank);
+  const missed = rows.filter(r => r.made && !r.picked).sort((a, b) => a.actual - b.actual || b.p - a.p);
+  const hits = picks.filter(r => r.made).length;
+  const teams = [0, 1, 2].map(i => picks.slice(i * 5, i * 5 + 5));
+  $('sub').textContent = 'Model top 15 for the season, grouped five per team by rank. Badges show what actually happened.';
+  $('view').innerHTML = `<p class="score"><b>${hits} / 15</b> of the real All-NBA players were in the model's top 15.</p>
+  <div class="teams">${teams.map((t, i) => `<div class="team"><h3>Predicted ${ord[i]} team</h3>${t.map(p =>
+    player(p, p.made ? `<span class="badge hit">Real ${ord[p.actual - 1]}</span>` : `<span class="badge miss">Not selected</span>`)).join('')}</div>`).join('')}
+  ${missed.length ? `<div class="team"><h3>Selected, but missed by the model</h3>${missed.map(p => player(p, `<span class="badge">Real ${ord[p.actual - 1]} · #${p.rank ?? '-'}</span>`)).join('')}</div>` : ''}</div>`;
+}
+
+function renderCurrent() {
+  const el = D.current.filter(r => r.eligible).sort((a, b) => a.rank - b.rank);
+  const out = D.current.filter(r => !r.eligible).sort((a, b) => b.p - a.p);
+  const teams = [0, 1, 2].map(i => el.slice(i * 5, i * 5 + 5));
+  $('sub').textContent = 'No labels for 2025-26 in this data copy yet, so these are pure model picks. Players under 65 counted games are excluded.';
+  $('view').innerHTML = `<div class="teams">${teams.map((t, i) => `<div class="team"><h3>Predicted ${ord[i]} team</h3>${t.map(p => player(p, `<small>${p.g} games</small>`)).join('')}</div>`).join('')}
+  <div class="team"><h3>Next in line</h3>${el.slice(15, 20).map(p => player(p, `<small>${p.g} games</small>`)).join('')}</div>
+  <div class="team"><h3>Ruled out by the 65-game rule</h3>${out.map(p => player(p, `<span class="badge miss">${p.g} games</span>${p.exception ? '<div><small>possible injury exception</small></div>' : ''}`)).join('')}</div></div>`;
+}
+
+function select(y) {
+  [...$('tabs').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.y == y));
+  y === 2026 ? renderCurrent() : renderPast(y);
+}
+$('tabs').innerHTML = seasons.map(y => `<button data-y="${y}" aria-pressed="false">${label(y)}</button>`).join('');
+$('tabs').onclick = e => { const y = e.target.dataset.y; if (y) select(+y); };
+select(2026);
+
+const names = {logreg: 'Logistic regression (chosen)', random_forest: 'Random forest', hist_gb: 'Gradient boosting',
+  logreg_no_voter_history: 'Logistic, no voter history', rank_by_vorp: 'Rank by VORP', rank_by_ws: 'Rank by Win Shares', rank_by_pts: 'Rank by points'};
+$('overall').innerHTML = `<thead><tr><th>Scorer</th><th class="num">Found</th><th class="num">PR-AUC</th></tr></thead><tbody>${
+  D.overall.map(r => `<tr><td>${r.scorer === 'logreg' ? '<b>' + names[r.scorer] + '</b>' : names[r.scorer] || r.scorer}</td><td class="num">${r.hits} / ${r.slots}</td><td class="num">${r.pr_auc.toFixed(3)}</td></tr>`).join('')}</tbody>`;
+</script>
+</body>
+</html>

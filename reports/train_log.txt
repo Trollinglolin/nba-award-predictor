@@ -1,0 +1,63 @@
+[train] All-NBA: train 1980-2019 (9466 rows, 555 positives); test 2020-2025 (1604 rows, 90 positives); features 34
+[train] cv logreg         {"C": 0.01}                                                                                                    PR-AUC 0.895  P@k 0.793
+[train] cv logreg         {"C": 0.1}                                                                                                     PR-AUC 0.899  P@k 0.797
+[train] cv logreg         {"C": 1.0}                                                                                                     PR-AUC 0.899  P@k 0.810
+[train] cv logreg         {"C": 10.0}                                                                                                    PR-AUC 0.894  P@k 0.807
+[train] cv random_forest  {"max_depth": null, "min_samples_leaf": 1}                                                                     PR-AUC 0.896  P@k 0.793
+[train] cv random_forest  {"max_depth": null, "min_samples_leaf": 5}                                                                     PR-AUC 0.895  P@k 0.790
+[train] cv random_forest  {"max_depth": null, "min_samples_leaf": 20}                                                                    PR-AUC 0.882  P@k 0.770
+[train] cv random_forest  {"max_depth": 8, "min_samples_leaf": 1}                                                                        PR-AUC 0.897  P@k 0.783
+[train] cv random_forest  {"max_depth": 8, "min_samples_leaf": 5}                                                                        PR-AUC 0.895  P@k 0.790
+[train] cv random_forest  {"max_depth": 8, "min_samples_leaf": 20}                                                                       PR-AUC 0.882  P@k 0.770
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 8, "min_samples_leaf": 20, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 8, "min_samples_leaf": 20, "l2_regularization": 1.0} PR-AUC 0.895  P@k 0.797
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 8, "min_samples_leaf": 80, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.810
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 8, "min_samples_leaf": 80, "l2_regularization": 1.0} PR-AUC 0.893  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 31, "min_samples_leaf": 20, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.793
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 31, "min_samples_leaf": 20, "l2_regularization": 1.0} PR-AUC 0.892  P@k 0.807
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 31, "min_samples_leaf": 80, "l2_regularization": 0.0} PR-AUC 0.888  P@k 0.793
+[train] cv hist_gb        {"learning_rate": 0.03, "max_iter": 400, "max_leaf_nodes": 31, "min_samples_leaf": 80, "l2_regularization": 1.0} PR-AUC 0.891  P@k 0.807
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 8, "min_samples_leaf": 20, "l2_regularization": 0.0} PR-AUC 0.890  P@k 0.813
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 8, "min_samples_leaf": 20, "l2_regularization": 1.0} PR-AUC 0.896  P@k 0.810
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 8, "min_samples_leaf": 80, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.810
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 8, "min_samples_leaf": 80, "l2_regularization": 1.0} PR-AUC 0.889  P@k 0.800
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 31, "min_samples_leaf": 20, "l2_regularization": 0.0} PR-AUC 0.892  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 31, "min_samples_leaf": 20, "l2_regularization": 1.0} PR-AUC 0.891  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 31, "min_samples_leaf": 80, "l2_regularization": 0.0} PR-AUC 0.894  P@k 0.803
+[train] cv hist_gb        {"learning_rate": 0.1, "max_iter": 150, "max_leaf_nodes": 31, "min_samples_leaf": 80, "l2_regularization": 1.0} PR-AUC 0.895  P@k 0.797
+[train] cv rank_by_vorp   PR-AUC 0.765  P@k 0.693
+[train] cv rank_by_ws     PR-AUC 0.765  P@k 0.697
+[train] cv rank_by_pts    PR-AUC 0.667  P@k 0.633
+[train] chosen by CV PR-AUC: logreg {'C': 0.1}
+[train] holdout (All-NBA):
+                 scorer          variant  pr_auc  roc_auc  precision_at_k  hits  slots  brier  p@k_2020_2023  p@k_2024plus
+                 logreg              raw   0.899    0.994           0.789    71     90  0.015          0.800         0.767
+                 logreg eligibility_mask   0.915    0.995           0.822    74     90  0.014          0.800         0.867
+          random_forest              raw   0.907    0.993           0.811    73     90  0.015          0.817         0.800
+          random_forest eligibility_mask   0.921    0.994           0.844    76     90  0.014          0.817         0.900
+                hist_gb              raw   0.893    0.992           0.800    72     90  0.016          0.800         0.800
+                hist_gb eligibility_mask   0.905    0.993           0.833    75     90  0.015          0.800         0.900
+logreg_no_voter_history              raw   0.915    0.995           0.822    74     90  0.014          0.833         0.800
+logreg_no_voter_history eligibility_mask   0.927    0.996           0.844    76     90  0.013          0.833         0.867
+           rank_by_vorp              raw   0.874    0.988           0.778    70     90    NaN          0.783         0.767
+           rank_by_vorp eligibility_mask   0.883    0.989           0.789    71     90    NaN          0.783         0.800
+             rank_by_ws              raw   0.709    0.968           0.633    57     90    NaN          0.667         0.567
+             rank_by_ws eligibility_mask   0.716    0.970           0.644    58     90    NaN          0.667         0.600
+            rank_by_pts              raw   0.717    0.963           0.644    58     90    NaN          0.667         0.600
+            rank_by_pts eligibility_mask   0.748    0.970           0.700    63     90    NaN          0.667         0.767
+[train] vote-share regressor: {'mae_all_rows': 0.01675725464566441, 'mae_vote_getters': 0.12739855912700693, 'spearman_within_season_vote_getters': 0.812262028877819, 'selection_precision_at_k_masked': 0.8222222222222222, 'team_assignment_accuracy_masked': 0.6081081081081081}
+[train] All-Star (test 2020-2026, k = real selections incl. injury replacements):
+      scorer   pr_auc  roc_auc  precision_at_k  hits  slots    brier
+      logreg 0.876172 0.984608        0.795699   148    186 0.028506
+     hist_gb 0.880378 0.983588        0.779570   145    186 0.028682
+ rank_by_pts 0.785643 0.961301        0.709677   132    186      NaN
+rank_by_vorp 0.793882 0.969201        0.731183   136    186      NaN
+[train] MVP (test 2020-2025):
+              scorer  winner_hits  seasons  mean_top5_overlap
+hist_gb_reg (masked)            4        6           3.833333
+   hist_gb_reg (raw)            4        6           3.833333
+        rank_by_vorp            3        6           3.333333
+          rank_by_ws            4        6           2.833333
+         rank_by_per            4        6           3.333333
+         rank_by_bpm            4        6           3.666667
+[train] wrote models to models and metrics to reports/metrics.json
